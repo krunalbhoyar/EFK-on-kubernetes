@@ -45,6 +45,7 @@ password: iXcCJJG3g47JhNcOVsqs
 $ kubectl apply -f .
 
 at kibana dashboard write [logstash-*] >> next "add filter+" >> @timestamp >> next
+
 =====================================================================================
 Theory::
 for production we have to use secrets not configmaps
