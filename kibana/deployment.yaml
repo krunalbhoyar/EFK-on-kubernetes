@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+spec:
+  selector:
+    matchLabels:
+      component: kibana
+  template:
+    metadata:
+      labels:
+        component: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: docker.elastic.co/kibana/kibana:6.5.4
+        env:
+        - name: ELASTICSEARCH_URL
+          value: http://elasticsearch:9200
+        - name: XPACK_SECURITY_ENABLED
+          value: "true"
+        - name: ELASTICSEARCH_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: kibana-config
+              key: elasticsearch_username
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: kibana-config
+              key: elasticsearch_password
+        envFrom:
+        - configMapRef:
+            name: kibana-config
+        ports:
+        - containerPort: 5601
+          name: http
+          protocol: TCP

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  labels:
+    component: fluentd
+data:
+  elasticsearch_username: elastic
+  elasticsearch_password: iXcCJJG3g47JhNcOVsqs # it needs to be changed
